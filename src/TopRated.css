@@ -1,0 +1,61 @@
+.watchlist-movie-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #14131A; 
+    color: #fff; 
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+  }
+
+
+  .watchlist-movie-card:hover {
+    background-color: #444; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-2px); 
+  }
+
+
+  .watchlist-movie-image {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .watchlist-movie-details {
+    display: flex;
+    flex-direction: column;
+    color: blue;
+  }
+  
+  .watchlist-movie-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffc107;
+  }
+  
+  .watchlist-movie-details p {
+    color: #e0e0e0; 
+  }
+  .watchlist-movie-details p i {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .info-icon-container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .watchlist-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+
+  

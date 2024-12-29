@@ -1,0 +1,182 @@
+/* Watchlist.css */
+.watchlist-container {
+  background: linear-gradient(145deg, #1a1922, #14131A);
+  min-height: 100vh;
+  padding: 4rem 2rem;
+}
+
+.watchlist-header {
+  max-width: 1400px;
+  margin: 0 auto 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.watchlist-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.sort-select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.sort-select:hover {
+  border-color: #fe9d00;
+}
+
+.view-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-btn:hover,
+.view-btn.active {
+  background: #fe9d00;
+  border-color: #fe9d00;
+  color: #14131A;
+}
+
+/* List View Styles */
+.movies-list {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.list-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.list-item:hover {
+  transform: translateY(-4px);
+  border-color: #fe9d00;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.list-item-poster {
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.list-item-poster img {
+  width: 120px;
+  height: 180px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.list-item-content {
+  flex-grow: 1;
+}
+
+.list-item-title {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.list-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.list-item-year {
+  color: #ccc;
+}
+
+.list-item-overview {
+  color: #ccc;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.list-item-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.genre-tag {
+  background: rgba(254, 157, 0, 0.2);
+  color: #fe9d00;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* Grid View Styles inherited from Content.css */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.movie-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+}
+
+.rating-star {
+  color: #fe9d00;
+}
+
+.movie-year {
+  color: #ccc;
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .watchlist-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .list-item {
+    flex-direction: column;
+  }
+  
+  .list-item-poster img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+  }
+}
