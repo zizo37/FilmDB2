@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Overlay background color */
+  background-color: rgba(20, 19, 26, 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,104 +12,143 @@
 }
 
 .modal-content {
-  background-color: #333; /* Modal content background color */
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  max-width: 800px;
+  background: linear-gradient(145deg, #1a1922, #14131A);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-width: 1000px;
   width: 90%;
   position: relative;
-  padding: 24px; /* Add padding to the modal content */
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-header {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 16px; /* Add some space between header and body */
+  margin-bottom: 16px;
 }
 
 .close-icon {
   color: #fff;
-  font-size: 24px;
+  font-size: 32px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-icon:hover {
+  color: #fe9d00;
+  transform: scale(1.1);
 }
 
 .modal-body {
-  padding: 0; 
+  padding: 0;
 }
 
 .movie-details {
   display: flex;
   align-items: flex-start;
-  background-color: #1a1a1a; 
-  border-radius: 8px;
-  padding: 24px; 
+  background: linear-gradient(145deg, #1a1922, #14131A);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .movie-poster img {
   max-width: 300px;
-  border-radius: 8px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.movie-poster img:hover {
+  transform: scale(1.02);
+  border-color: rgba(254, 157, 0, 0.3);
 }
 
 .movie-info {
-  margin-left: 24px;
+  margin-left: 32px;
   color: #fff;
 }
-  .movie-title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 16px;
+
+.movie-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #fff, #fe9d00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.movie-rating,
+.movie-year {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+
+.rating-icon,
+.year-icon {
+  margin-right: 12px;
+  color: #fe9d00;
+}
+
+.movie-overview {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.download-btn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.download-btn:hover {
+  background: #fe9d00;
+  border-color: #fe9d00;
+  color: #14131A;
+  transform: translateY(-2px);
+}
+
+.download-icon {
+  margin-right: 12px;
+}
+
+@media (max-width: 768px) {
+  .movie-details {
+    flex-direction: column;
+    align-items: center;
   }
-  
+
+  .movie-info {
+    margin-left: 0;
+    margin-top: 24px;
+    text-align: center;
+  }
+
   .movie-rating,
   .movie-year {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
+    justify-content: center;
   }
-  
-  .rating-icon,
-  .year-icon {
-    margin-right: 8px;
-    color: #ffd700;
+
+  .movie-title {
+    font-size: 2rem;
   }
-  
-  .movie-overview {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 16px;
+
+  .movie-poster img {
+    max-width: 100%;
+    height: auto;
   }
-  
-  .download-btn {
-    background-color: #ffd700;
-    color: #333;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 16px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .download-btn:hover {
-    background-color: #e6c300;
-  }
-  
-  .download-icon {
-    margin-right: 8px;
-  }
-  
-  @media (max-width: 768px) {
-    .movie-details {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .movie-info {
-      margin-left: 0;
-      margin-top: 24px;
-      text-align: center;
-    }
-  }
+}

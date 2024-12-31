@@ -72,52 +72,66 @@ function SignIn() {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      <div style={{ flex: '0 0 50%', backgroundImage: 'url(moviesbg.jpg)', backgroundRepeat: 'no-repeat', backgroundColor: '#f0f0f0', backgroundSize: 'cover', backgroundPosition: 'center' }} />
-      <div style={{ flex: '0 0 50%', padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-            <img src="filmdb.png" alt="logo" style={{ width: '150px' }} />
+    <div className="auth-container">
+      <div className="auth-content">
+        <img src="filmdb.png" alt="FilmDB Logo" className="auth-logo" />
+        <div className="auth-form-container">
+          <button className="auth-google-btn" onClick={handleGoogleSignIn}>
+            <img src="Google_logo.png" alt="Google" width="24" />
+            Sign in with Google
+          </button>
+
+          <div className="auth-divider">
+            <span>or continue with email</span>
           </div>
-          <div style={{ width: '300px', display: 'flex', flexDirection: 'column' }}>
-            <button 
-              onClick={handleGoogleSignIn} 
-              className="btn mb-3" 
-              style={{ 
-                backgroundColor: 'white', 
-                padding: '0.5rem', 
-                border: 'none', 
-                borderRadius: '4px', 
-                cursor: 'pointer', 
-                marginBottom: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <img src="Google_logo.png" alt="Google Logo" style={{ marginRight: '10px', width: '25px' }} />
-              Sign In with Google
-            </button>
-          </div>
-          <p style={{ color: 'white', marginBottom: '1rem' }}>or Sign in with email</p>
-          <form onSubmit={handleSubmit} style={{ width: '300px', display: 'flex', flexDirection: 'column' }}>
-            <input type="email" name="email" placeholder="Email Address" required style={{ marginBottom: '1rem', padding: '0.5rem', border: '1px solid #ccc', borderRadius: '4px' }} />
-            <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '1rem' }}>
-              <span style={{ color: 'white', fontSize: '0.8rem', cursor: 'pointer' }} onClick={handleForgotPassword}>Forgot Password?</span>
+
+          <form onSubmit={handleSubmit} className="auth-form">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              required
+              className="auth-input"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              className="auth-input"
+            />
+            <div style={{ textAlign: 'right' }}>
+              <a href="/forgotpassword" className="auth-link">
+                Forgot password?
+              </a>
             </div>
-            <input type="password" name="password" placeholder="Password" required style={{ marginBottom: '1rem', padding: '0.5rem', border: '1px solid #ccc', borderRadius: '4px' }} />
-            <button type="submit" className="btn btn-warning" style={{ padding: '0.5rem', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Sign In</button>
-            {errorMessage && <div className="alert alert-danger my-3" role="alert" >{errorMessage}</div>}
+            <button
+                type="submit"
+                className="auth-btn"
+                style={{ padding: '10px 20px' }}
+              >
+                Sign In
+              </button>
+            {errorMessage && (
+              <div className="auth-error">{errorMessage}</div>
+            )}
           </form>
-          <div style={{ marginBottom: '1rem', fontSize: '0.8rem' }}></div>
-          <div style={{ fontSize: '0.8rem' }}>
-            <span style={{ color: "white", fontWeight: 'bold' }}>Don't have an account? </span>
-            <a href="/signup" style={{ color: 'white', textDecoration: 'underline', marginLeft: '0.5rem' }}>Sign Up</a>
+
+          <div style={{ textAlign: 'center', marginTop: '2rem', color: 'rgba(255, 255, 255, 0.7)' }}>
+            Don't have an account?{' '}
+            <a href="/signup" className="auth-link">
+              Sign up
+            </a>
           </div>
         </div>
+      </div>
+      <div
+        className="auth-image-section"
+        style={{ backgroundImage: 'url(moviesbg.jpg)' }}
+      >
+        <div className="auth-image-overlay" />
       </div>
     </div>
   );
 }
-
 export default SignIn;

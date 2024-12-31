@@ -49,6 +49,11 @@ const SearchResults = () => {
         return date.getFullYear();
     };
 
+    const getDetailsPath = (result) => {
+        // If it's a movie, route to /movie/:id, if it's a TV show, route to /series/:id
+        return mediaType === 'movie' ? `/movie/${result.id}` : `/tv/${result.id}`;
+    };
+
     return (
         <>
             <Header />
@@ -87,7 +92,7 @@ const SearchResults = () => {
                                             </span>
                                         </div>
                                         <Link 
-                                            to={`/${mediaType}/${result.id}`}
+                                            to={getDetailsPath(result)}
                                             className="search-card-button"
                                         >
                                             View Details

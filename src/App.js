@@ -18,6 +18,7 @@ import Popular from './Popular';
 import TopRated from "./TopRated";
 import PopularS from "./PopularSeries";
 import TopRatedS from "./TopRatedS";
+import Series from "./Series";
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
         <Route path="/user" element={<User />} />
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/movie/:id" element={<Movie />} />
+        <Route path="/tv/:id" element={<Series />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/update-Password" element={<UserUpdatePassword />} />
         <Route path="/delete-account" element={<UserDeleteAccount />} />

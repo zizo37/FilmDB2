@@ -146,7 +146,7 @@ const Content = () => {
   const startAutoSlide = () => {
     const interval = setInterval(() => {
       handleNextSlide();
-    }, 3000); // Change slide every 3 seconds
+    }, 4000); // Change slide every 3 seconds
     setAutoSlideInterval(interval);
   };
 

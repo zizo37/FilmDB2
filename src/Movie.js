@@ -17,6 +17,7 @@ const Movie = () => {
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
   const [showTrailer, setShowTrailer] = useState(false);
+  const [castData, setCastData] = useState([]);
   
 
   // Check authentication status
@@ -61,7 +62,26 @@ const Movie = () => {
     }
   };
 
-  
+  useEffect(() => {
+    const fetchCastData = async () => {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits`, {
+          headers: {
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYzI3N2U4NzIyNjA4YTNjOGU1YWNjZmQ0ZTVmZDk0ZSIsInN1YiI6IjY2MTVkMjg2YWM0MTYxMDE3YzkyOTlhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SCbzx_EgdSfu_R2NVoQ8pGKqwIFfm8tXz-yd3HoLJX8'
+          },
+        });
+        const data = await response.json();
+        console.log(data);
+        setCastData(data.cast || []);
+      } catch (error) {
+        console.error('Failed to fetch cast data:', error);
+      }
+    };
+
+    fetchCastData();
+  }, [id]);
+
+
   const handleReviewSubmit = async (e) => {
     e.preventDefault(); // Empêche le rechargement de la page
   
@@ -320,12 +340,30 @@ const Movie = () => {
                   <div>{movieData.credits.crew.find(person => person.job === 'Director')?.name || 'N/A'}</div>
                 </div>
               )}
-              {movieData.credits?.cast && (
+              {/* {movieData.credits?.cast && (
                 <div className="info-item">
                   <div className="info-label">Cast</div>
                   <div>{movieData.credits.cast.slice(0, 3).map(actor => actor.name).join(', ')}</div>
                 </div>
-              )}
+              )} */}
+
+<div className="cast-section">
+        <h2>Cast & Characters</h2>
+        <div className="cast-grid">
+          {castData.map(actor => (
+            <div key={actor.id} className="cast-card">
+              <img
+                src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                alt={actor.name}
+              />
+              <div className="cast-info">
+                <h4>{actor.name}</h4>
+                <p>{actor.character}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
               {movieData.genres && (
                 <div className="info-item">
                   <div className="info-label">Genres</div>
