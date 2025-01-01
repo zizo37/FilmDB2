@@ -6,6 +6,7 @@ import { FaStar, FaPlus, FaMinus, FaPlay, FaTimes } from 'react-icons/fa';
 import './Series.css'; // We can reuse the Movie.css styles
 import Header from './Header';
 import { supabase } from './supabaseClient';
+import EpisodeHeatmap from './EpisodeHeatmap';
 
 const Series = () => {
   const { id } = useParams();
@@ -396,7 +397,7 @@ const Series = () => {
                         ))}
                     </select>
               </div>
-
+              <EpisodeHeatmap seriesId={seriesData.id} />
               {/* Media Navigation */}
               <div className="media-nav">
                 <button
