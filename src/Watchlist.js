@@ -125,39 +125,39 @@ const Watchlist = () => {
         {view === 'grid' ? (
           <div className="movies-grid">
             {sortedMovieData.map((movie, index) =>
-              movie ? (
-                <div
-                  className="movie-card"
-                  key={watchlist[index].id}
-                  style={{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`
-                  }}
-                  onClick={() => handleImageClick(movie.id)}
-                >
-                  <div className="movie-overlay">
-                    <h3 className="movie-title">{movie.title}</h3>
-                    <div className="movie-rating">
-                      <FaStar className="rating-star" />
-                      <span>{movie.vote_average.toFixed(1)}</span>
-                    </div>
-                    <div className="movie-year">{movie.release_date.substr(0, 4)}</div>
-                    <div className="movie-genres">
-                      {movie.genres.slice(0, 3).map((genre) => (
-                        <span key={genre.id} className="genre-tag">
-                          {genre.name}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : null
-            )}
+  movie && movie.vote_average && movie.release_date ? (
+    <div
+      className="movie-card"
+      key={watchlist[index].id}
+      style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`
+      }}
+      onClick={() => handleImageClick(movie.id)}
+    >
+      <div className="movie-overlay">
+        <h3 className="movie-title">{movie.title}</h3>
+        <div className="movie-rating">
+          <FaStar className="rating-star" />
+          <span>{movie.vote_average?.toFixed(1)}</span>
+        </div>
+        <div className="movie-year">{movie.release_date.substr(0, 4)}</div>
+        <div className="movie-genres">
+          {movie.genres?.slice(0, 3).map((genre) => (
+            <span key={genre.id} className="genre-tag">
+              {genre.name}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  ) : null
+)}
           </div>
         ) : (
           <div className="movies-list">
             {sortedMovieData.map((movie, index) =>
-              movie ? (
-                <div className="list-item" key={watchlist[index].id}>
+  movie && movie.vote_average && movie.release_date ? (
+    <div className="list-item" key={watchlist[index].id}>
                   <div className="list-item-poster" onClick={() => handleImageClick(movie.id)}>
                     <img
                       src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
@@ -167,10 +167,10 @@ const Watchlist = () => {
                   <div className="list-item-content">
                     <h3 className="list-item-title">{movie.title}</h3>
                     <div className="list-item-meta">
-                      <div className="movie-rating">
-                        <FaStar className="rating-star" />
-                        <span>{movie.vote_average.toFixed(1)}</span>
-                      </div>
+                    <div className="movie-rating">
+        <FaStar className="rating-star" />
+        <span>{movie.vote_average?.toFixed(1)}</span>
+      </div>
                       <span className="list-item-year">{movie.release_date.substr(0, 4)}</span>
                     </div>
                     <p className="list-item-overview">{movie.overview}</p>

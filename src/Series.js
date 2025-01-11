@@ -1,5 +1,3 @@
-// Series.js
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaStar, FaPlus, FaMinus, FaPlay, FaTimes } from 'react-icons/fa';
@@ -7,6 +5,7 @@ import './Series.css'; // We can reuse the Movie.css styles
 import Header from './Header';
 import { supabase } from './supabaseClient';
 import EpisodeHeatmap from './EpisodeHeatmap';
+import Rating from './Rating';
 
 const Series = () => {
   const { id } = useParams();
@@ -185,38 +184,31 @@ const Series = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!user || !seriesData) return;
-
+  
       try {
         // Check watchlist status
-        const { data: watchlistData, error: watchlistError } = await supabase
+        const { data: watchlistData } = await supabase
           .from('watchlist')
           .select('*')
           .eq('user_id', user.id)
           .eq('series_id', seriesData.id.toString());
-
-        if (watchlistError) throw watchlistError;
+  
         setIsInWatchlist(watchlistData && watchlistData.length > 0);
-
+  
         // Fetch reviews
-        const { data: reviewsData, error: reviewsError } = await supabase
+        const { data: reviewsData } = await supabase
           .from('reviews')
-          .select(`
-            id,
-            review,
-            created_at,
-            user_id,
-            series_id
-          `)
+          .select('*')
           .eq('series_id', seriesData.id.toString())
           .order('created_at', { ascending: false });
-
-        if (reviewsError) throw reviewsError;
+  
         setReviews(reviewsData || []);
+        
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
     };
-
+  
     fetchUserData();
   }, [user, seriesData]);
 
@@ -228,23 +220,19 @@ const Series = () => {
 
     try {
       if (isInWatchlist) {
-        const { error } = await supabase
+        await supabase
           .from('watchlist')
           .delete()
           .eq('user_id', user.id)
           .eq('series_id', seriesData.id.toString());
-
-        if (error) throw error;
-        setIsInWatchlist(false);
       } else {
-        const { error } = await supabase
+        await supabase
           .from('watchlist')
-          .insert([
-            {
-              user_id: user.id,
-              series_id: seriesData.id.toString()
-            }
-          ]);
+          .insert({
+            user_id: user.id,
+            series_id: seriesData.id.toString(),
+            movie_id: null
+          });
 
         if (error) throw error;
         setIsInWatchlist(true);
@@ -252,6 +240,31 @@ const Series = () => {
     } catch (error) {
       console.error('Error updating watchlist:', error);
       alert(`Failed to ${isInWatchlist ? 'remove from' : 'add to'} watchlist`);
+    }
+  };
+
+  const handleRating = async (rating) => {
+    if (!user) {
+      alert('Please sign in to rate');
+      return;
+    }
+  
+    try {
+      const { error } = await supabase
+        .from('ratings')
+        .upsert([
+          {
+            user_id: user.id,
+            series_id: seriesData.id.toString(),
+            rating: rating
+          }
+        ]);
+  
+      if (error) throw error;
+      setUserRating(rating);
+    } catch (error) {
+      console.error('Error submitting rating:', error);
+      alert('Failed to submit rating');
     }
   };
 
@@ -271,13 +284,12 @@ const Series = () => {
     try {
       const { error } = await supabase
         .from('reviews')
-        .insert([
-          {
-            user_id: user.id,
-            series_id: seriesData.id.toString(),
-            review: reviewText.trim()
-          }
-        ]);
+        .insert({
+          user_id: user.id,
+          series_id: seriesData.id.toString(),
+          review: reviewText.trim(),
+          movie_id: null
+        });
 
       if (error) throw error;
 
@@ -344,6 +356,18 @@ const Series = () => {
           <div className="hero-content">
             <h1 className="movie-title">{seriesData.name}</h1>
             <div className="movie-meta">
+            <div className="rating-float-box">
+  <div className="rating-float-content">
+    <div className="rating-label">Your Rating</div>
+    <Rating 
+      initialRating={userRating} 
+      onRate={(rating) => handleRating(rating)} 
+    />
+    {userRating > 0 && (
+      <div className="rating-value">{userRating}/10</div>
+    )}
+  </div>
+</div>
               <div className="rating-badge">
                 <FaStar /> {seriesData.vote_average?.toFixed(1)}
               </div>
@@ -353,6 +377,10 @@ const Series = () => {
               <span>{seriesData.number_of_seasons} Seasons</span>
             </div>
             <div className="movie-actions">
+            {/* <Rating 
+  initialRating={userRating} 
+  onRate={(rating) => handleRating(rating)} 
+/> */}
               {trailerVideo && (
                 <button 
                   className="action-button primary-button"

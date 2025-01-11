@@ -88,9 +88,10 @@ const UserWatchlist = () => {
               <div className="movie-overlay">
                 <h3 className="movie-title">{movie.title}</h3>
                 <div className="movie-rating">
-                  <FaStar className="rating-star" />
-                  <span>{movie.vote_average.toFixed(1)}</span>
-                </div>
+                <FaStar className="rating-star" />
+                <span>{movie.vote_average ? movie.vote_average.toFixed(1) : "N/A"}</span>
+              </div>
+
                 <button className="show-more-btn">
                   More Details
                 </button>

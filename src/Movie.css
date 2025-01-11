@@ -355,3 +355,38 @@
     font-size: 0.8rem;
   }
 }
+
+
+.rating-float-box {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(15, 15, 19, 0.9);
+  border: 1px solid rgba(254, 157, 0, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.rating-float-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rating-value {
+  color: #fe9d00;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rating-float-box {
+    position: static;
+    transform: none;
+    margin: 1rem 0;
+  }
+}

@@ -101,7 +101,7 @@ const PopularS = () => {
             filteredMovies.map(movie => {
               const { id, name, poster_path, vote_average } = movie;
               const imageUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
-              const movieLink = `/movie/${id}`;
+              const movieLink = `/tv/${id}`;
 
               return (
                 <div className="movie-wrapper" key={id}>

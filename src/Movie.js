@@ -4,6 +4,7 @@ import { FaStar, FaPlus, FaMinus, FaPlay, FaTimes } from 'react-icons/fa';
 import './Movie.css';
 import Header from './Header';
 import { supabase } from './supabaseClient';
+import Rating from './Rating';
 
 const Movie = () => {
   const { id } = useParams();
@@ -289,9 +290,21 @@ const Movie = () => {
         <div className="hero-content">
           <h1 className="movie-title">{movieData.title}</h1>
           <div className="movie-meta">
-            <div className="rating-badge">
+            {/* <div className="rating-badge">
               <FaStar /> {movieData.vote_average?.toFixed(1)}
-            </div>
+            </div> */}
+            <div className="rating-float-box">
+  <div className="rating-float-content">
+    <div className="rating-label">Your Rating</div>
+    <Rating 
+      initialRating={userRating} 
+      onRate={(rating) => handleRating(rating)} 
+    />
+    {userRating > 0 && (
+      <div className="rating-value">{userRating}/10</div>
+    )}
+  </div>
+</div>
             {movieData.release_date && (
               <span>{movieData.release_date.slice(0, 4)}</span>
             )}
@@ -300,6 +313,10 @@ const Movie = () => {
             )}
           </div>
           <div className="movie-actions">
+          {/* <Rating 
+  initialRating={userRating} 
+  onRate={(rating) => handleRating(rating)} 
+/> */}
             {trailerVideo && (
               <button 
                 className="action-button primary-button"
